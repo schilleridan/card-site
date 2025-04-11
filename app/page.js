@@ -54,7 +54,7 @@ export default function Home() {
       setDrawing(false);
       setDeck(prev => prev.filter((_, i) => i !== index));
       setDrawnCards(prev => [...prev, selectedCard]);
-    }, 1000); // sync with animation duration
+    }, 600);
   };
 
   const shuffleDeck = () => {
@@ -73,7 +73,6 @@ export default function Home() {
       <h1 className={`${styles.title} ${cinzel.className}`}>Random Card Simulator</h1>
 
       <div className={styles.cardArea}>
-        {/* Face-down deck on the left */}
         {deck.length > 0 && (
           <div className={clsx(styles.deckContainer, isShuffling && styles.shuffling)}>
             <Image
@@ -87,29 +86,16 @@ export default function Home() {
           </div>
         )}
 
-        {/* Card in motion */}
         {cardInMotion && (
-          <div className={styles.movingCard}>
-            <div className={styles.cardFlip}>
-              <Image
-                src="/cards/back.png"
-                alt="Back of card"
-                width={200}
-                height={300}
-                className={styles.cardBack}
-              />
-              <Image
-                src={`/cards/${cardInMotion}`}
-                alt="Drawn card"
-                width={200}
-                height={300}
-                className={styles.cardFront}
-              />
-            </div>
-          </div>
+          <Image
+            src={`/cards/${cardInMotion}`}
+            alt="Card in motion"
+            width={200}
+            height={300}
+            className={styles.movingCard}
+          />
         )}
 
-        {/* Face-up pile on the right */}
         <div className={styles.pileContainer}>
           {drawnCards.map((card, index) => (
             <Image
@@ -129,7 +115,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Buttons */}
       <div className={styles.buttons}>
         <button className={styles.btn} onClick={drawCard} disabled={drawing}>Draw Card</button>
         <button className={styles.btn} onClick={shuffleDeck} disabled={isShuffling}>Shuffle</button>
