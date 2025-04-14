@@ -54,7 +54,7 @@ export default function Home() {
       setDrawing(false);
       setDeck(prev => prev.filter((_, i) => i !== index));
       setDrawnCards(prev => [...prev, selectedCard]);
-    }, 600);
+    }, 1000);
   };
 
   const shuffleDeck = () => {
@@ -87,13 +87,24 @@ export default function Home() {
         )}
 
         {cardInMotion && (
-          <Image
-            src={`/cards/${cardInMotion}`}
-            alt="Card in motion"
-            width={200}
-            height={300}
-            className={styles.movingCard}
-          />
+          <div className={styles.movingCard}>
+            <div className={styles.cardFlip}>
+              <Image
+                src="/cards/back.png"
+                alt="Card back"
+                width={250}
+                height={350}
+                className={styles.cardBack}
+              />
+              <Image
+                src={`/cards/${cardInMotion}`}
+                alt="Card front"
+                width={250}
+                height={350}
+                className={styles.cardFront}
+              />
+            </div>
+          </div>
         )}
 
         <div className={styles.pileContainer}>
